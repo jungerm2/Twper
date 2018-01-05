@@ -87,6 +87,8 @@ A search is described by a query string (q_str) and these have the following pro
 | since:2017-12-01  | tweets after date                        |
 | until:2017-12-02  | tweets before date                       |
 | place:LOCATION_ID | tweets from location with id LOCATION_ID |
+
+
 *Note:* Ordering does not matter, and a search is case-insensitive except for keywords OR, from:, to: 
 since:, until: and place: which should be written exactly as above. Also there should NOT be a space 
 between the colon and search value (ex: from: A is wrong and will search for tweets containing 
