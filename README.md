@@ -177,10 +177,13 @@ only retrieve stats about a user account.
 you can set language to something other than 'en' in the Query constructor. Setting it to None searches 
 everything regardless of the language.
 
+## Authors
+
+* Sacha Jungerman - Initial Work - [Twper](https://github.com/jungerm2/Twper)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) for details
 
 ## Acknowledgments
 
