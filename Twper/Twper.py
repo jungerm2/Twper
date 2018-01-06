@@ -106,6 +106,13 @@ class TwitterAccount(object):
                 return soup.find(*args)
             else:
                 return None
+        def get_bday(bday_str):
+            bday_str = bday_str.lower().replace('born', '').replace('in', '').replace('on', '').strip()
+            for date_format in ['%B %Y', '%Y', '%B %d', '%B %d, %Y']:
+                try:
+                    return datetime.strptime(bday_str, date_format)
+                except ValueError as error:
+                    pass
         header = profile.find('div', 'ProfileHeaderCard')
         navbar = profile.find('div', 'ProfileCanopy-navBar')
         tws = find_safe(navbar.find('a', attrs={'data-nav': 'tweets'}), 'span', 'ProfileNav-value')
@@ -133,7 +140,7 @@ class TwitterAccount(object):
             location=loc.text if loc else '',
             location_id=loc['data-place-id'] if loc else '',
             website=wbs['title'] if wbs else '',
-            birthday=datetime.strptime(bdy.text.strip(), 'Born in %Y') if bdy else None,
+            birthday=get_bday(bdy.text.strip()) if bdy else None,
             joined=datetime.strptime(jnd['title'].strip(), '%I:%M %p - %d %b %Y') if not jnd else None,
         )
 

@@ -82,21 +82,37 @@ empty string and for ints its zero.
 A search is described by a query string (q\_str) and these have the
 following properties:
 
-\| q\_str \| What it will query for \|
-\|:-----------------:\|:----------------------------------------:\| \| A
-B C \| tweets containing A and B and C \| \|"ABC" \| tweets containing
-the exact match ABC \| \| A OR C \| tweets containing either A or C \|
-\| -A -B \| tweets NOT containing A and NOT B \| \| #ABC \| tweets
-containing the hashtag #ABC \| \| from:A \| tweets that are from account
-A \| \| to:B \| tweets that are to account B \| \| @C \| tweets that
-mention account C \| \| since:2017-12-01 \| tweets after date \| \|
-until:2017-12-02 \| tweets before date \| \| place:LOCATION\_ID \|
-tweets from location with id LOCATION\_ID \| *Note:* Ordering does not
-matter, and a search is case-insensitive except for keywords OR, from:,
-to: since:, until: and place: which should be written exactly as above.
-Also there should NOT be a space between the colon and search value (ex:
-from: A is wrong and will search for tweets containing 'from:' and 'A'
-instead of the intended behavior).
++----------------------+---------------------------------------------+
+| q\_str               | What it will query for                      |
++======================+=============================================+
+| A B C                | tweets containing A and B and C             |
++----------------------+---------------------------------------------+
+| "ABC"                | tweets containing the exact match ABC       |
++----------------------+---------------------------------------------+
+| A OR C               | tweets containing either A or C             |
++----------------------+---------------------------------------------+
+| -A -B                | tweets NOT containing A and NOT B           |
++----------------------+---------------------------------------------+
+| #ABC                 | tweets containing the hashtag #ABC          |
++----------------------+---------------------------------------------+
+| from:A               | tweets that are from account A              |
++----------------------+---------------------------------------------+
+| to:B                 | tweets that are to account B                |
++----------------------+---------------------------------------------+
+| @C                   | tweets that mention account C               |
++----------------------+---------------------------------------------+
+| since:2017-12-01     | tweets after date                           |
++----------------------+---------------------------------------------+
+| until:2017-12-02     | tweets before date                          |
++----------------------+---------------------------------------------+
+| place:LOCATION\_ID   | tweets from location with id LOCATION\_ID   |
++----------------------+---------------------------------------------+
+
+*Note:* Ordering does not matter, and a search is case-insensitive
+except for keywords OR, from:, to: since:, until: and place: which
+should be written exactly as above. Also there should NOT be a space
+between the colon and search value (ex: from: A is wrong and will search
+for tweets containing 'from:' and 'A' instead of the intended behavior).
 
 In this package there's two classes used to search tweets (Query,
 Queries). Both these classes have a get\_tweets method which returns an
@@ -192,11 +208,17 @@ add/fix here is the todo list:
    than 'en' in the Query constructor. Setting it to None searches
    everything regardless of the language.
 
+Authors
+-------
+
+-  Sacha Jungerman - Initial Work -
+   `Twper <https://github.com/jungerm2/Twper>`__
+
 License
 -------
 
 This project is licensed under the MIT License - see the
-`LICENSE.md <LICENSE.md>`__ for details
+`LICENSE <LICENSE>`__ for details
 
 Acknowledgments
 ---------------
