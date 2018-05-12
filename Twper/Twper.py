@@ -6,6 +6,7 @@ import aiohttp
 import asyncio
 from fake_useragent import UserAgent
 import requests
+from aiostream import stream
 
 ua = UserAgent()
 HEADERS_LIST = [ua.chrome, ua.google, ua['google chrome'], ua.firefox, ua.ff]
@@ -251,34 +252,10 @@ class Queries(object):
     async def get_tweets(self):
         queries = [Query(q_str, limit=self.limit, sem=self.sem).get_tweets()
                    for q_str in self.q_strs]
-
-        tweets, queries = await self.get_next_tweets(queries)
-        while True:
-            if not tweets:
-                return
-            else:
-                max_tweet = max(tweets, key=self.unix_time)
-                index = tweets.index(max_tweet)
-                try:
-                    tweets[index] = await queries[index].__anext__()
-                except StopAsyncIteration:
-                    tweets.remove(max_tweet)
-                    del queries[index]
-                yield max_tweet
-
-    # Helper Method for the above function, it manually runs all generators
-    # and removes any exhausted generators from the queries list
-    @staticmethod
-    async def get_next_tweets(queries):
-        tweets = []
-        filtered_qs = []
-        for q in queries:
-            try:
-                tweets.append(await q.__anext__())
-                filtered_qs.append(q)
-            except StopAsyncIteration:
-                pass
-        return tweets, filtered_qs
+        qs = stream.merge(*queries)
+        async with qs.stream() as streamer:
+            async for q in streamer:
+                yield q
 
     # This is a key function to sort tweets in chronologically
     @staticmethod

@@ -13,7 +13,7 @@ with open('requirements.txt') as requirements:
 
 setup(
     name='Twper',
-    version='0.1.1',
+    version='0.1.3',
     description='An asynchronous twitter scraper',
     long_description=long_description,
     url='https://github.com/jungerm2/Twper',

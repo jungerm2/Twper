@@ -5,3 +5,4 @@ fake_useragent
 requests
 asyncio
 aiohttp
+aiostream

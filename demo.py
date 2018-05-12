@@ -14,7 +14,7 @@ async def main():
 
     print('------------------------------------------')
 
-    qs = Queries(['Some', 'Query', 'Goes', 'Here'], limit=5)
+    qs = Queries(['Some', 'Query', 'Goes', 'Here'], limit=500)
     async for tw in qs.get_tweets():
         # Process data
         total_tweets += 1

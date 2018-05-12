@@ -193,11 +193,6 @@ add/fix here is the todo list:
    TwitterAccount.from\_username and therefore doesn't affect the
    performance of Querying.
 
--  Look more into why Queries is not faster than multiple Query
-   searches. It's an async generator and should run faster than running
-   a couple of async generators sequentially. As of now, I'm unsure why
-   this is the case.
-
 -  Improve the TwitterAccount class. Hopefully it's possible to scrape
    what accounts a user is following and what accounts are following the
    user if we add authentication. Currently we can only retrieve stats
