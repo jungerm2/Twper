@@ -1,7 +1,7 @@
 coala-utils~=0.5.0
 bs4
 lxml
-fake_useragent
+user_agent
 requests
 asyncio
 aiohttp
