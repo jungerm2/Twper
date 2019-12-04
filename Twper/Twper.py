@@ -4,12 +4,14 @@ from coala_utils.decorators import generate_ordering
 import random
 import aiohttp
 import asyncio
-from fake_useragent import UserAgent
+from user_agent import generate_user_agent
 import requests
 from aiostream import stream
 
-ua = UserAgent()
-HEADERS_LIST = [ua.chrome, ua.google, ua['google chrome'], ua.firefox, ua.ff]
+HEADERS_LIST = [
+    generate_user_agent(navigator='firefox', device_type='desktop'),
+    generate_user_agent(navigator='chrome', device_type='desktop')
+]
 
 
 # For the most part this was shamelessly stolen from https://github.com/taspinar/twitterscraper
@@ -208,7 +210,7 @@ class Query(object):
                         if not tweets:
                             return [], None
                         return tweets, json_resp['min_position']
-                except (ConnectionError, aiohttp.client_exceptions):
+                except (ConnectionError, aiohttp.ClientError):
                     if retry > 0:
                         return await self.query_single_page(session, url, html_response=html_response, retry=retry-1)
                 return [], None
